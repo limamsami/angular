@@ -8,7 +8,12 @@
 		<tr>
 			<th *ngFor="let col of columns">
 				<p-columnFilter type="{{col.type}}" [field]="col.field" [matchModeOptions]="col.matchModeOptions"
-					[matchMode]="'custom-equals'"></p-columnFilter>
+					[matchMode]="'custom-equals'">
+					<ng-template *ngIf="col.type == 'date'" pTemplate="filter" let-filter="filterCallback">
+						<p-calendar dateFormat="dd-mm-yy"></p-calendar>
+					 </ng-template>
+				
+				</p-columnFilter>
 			</th>
 		</tr>
 	</ng-template>
