@@ -3,6 +3,8 @@ import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
 import { Car } from "./car";
 import { CarService } from "./carservice";
 import * as moment from 'moment';
+import { Calendar } from 'primeng/calendar';
+Calendar.prototype.getDateFormat = () => 'dd-mm-yy';
 
 @Component({
   selector: "app-root",
