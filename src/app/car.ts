@@ -5,4 +5,5 @@ export interface Car {
     color?: any;
     price?: any;
     saleDate?: any;
+    date?: any;
 }
