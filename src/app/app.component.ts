@@ -66,12 +66,20 @@ export class AppComponent {
     this.carService.getCarsMedium().then(cars => (this.cars = cars));
   }
 
-  onDateFilterSelect(event: any) {
+  onBeginDateFilterSelect(event: any) {
     // Handle date filter selection
     this.beginDateFilterValue = event;
 
     // Apply filter
     this.applyFilterBegin();
+  }
+
+  onEndDateFilterSelect(event: any) {
+    // Handle date filter selection
+    this.endDateFilterValue = event;
+
+    // Apply filter
+    this.applyFilterEnd();
   }
 
   applyFilterBegin() {
@@ -86,6 +94,10 @@ export class AppComponent {
     });
 	console.log(this.filteredCars)
 	this.cars = this.filteredCars;
+  }
+
+  applyFilterEnd() {
+
   }
 
 
