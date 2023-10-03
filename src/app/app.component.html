@@ -1,114 +1,21 @@
-<h1 style="color:green;text-align:center;">GeeksforGeeks</h1>
-<h3>Angular PrimeNG Table ColumnFilter Properties</h3>
-
-<p-table
-	#dt
-	[value]="tutorials"
-	dataKey="title"
-	[rowHover]="true"
-	[showCurrentPageReport]="true"
-	[filterDelay]="0"
-	[globalFilterFields]="['title', 'category', 'rating', 'date']"
-	
->
-	<ng-template pTemplate="caption">
-		<div class="table-header">List of Tutorials</div>
-	</ng-template>
-	<ng-template pTemplate="header">
+<p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+	<ng-template pTemplate="header" let-columns>
 		<tr>
-			<th style="width: 3rem">
-			<p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+			<th *ngFor="let col of columns">
+				{{col.header}}
 			</th>
-			<th pSortableColumn="title">
-				<div class="flex justify-content-between align-items-center">
-					Title
-					<p-sortIcon field="title"></p-sortIcon>
-					<p-columnFilter
-						type="text"
-						field="title"
-						display="menu"
-						class="ml-auto">
-					</p-columnFilter>
-				</div>
-			</th>
-			<th pSortableColumn="category">
-				<div class="flex justify-content-between align-items-center">
-					Category
-					<p-sortIcon field="category"></p-sortIcon>
-					<p-columnFilter
-						type="text"
-						field="category"
-						display="menu"
-						class="ml-auto">
-					</p-columnFilter>
-				</div>
-			</th>
-
-			<th pSortableColumn="rating">
-				<div class="flex justify-content-between align-items-center">
-					Rating
-					<p-sortIcon field="rating"></p-sortIcon>
-					<p-columnFilter
-						type="numeric"
-						field="rating"
-						display="menu"
-						class="ml-auto">
-					</p-columnFilter>
-				</div>
-			</th>
-
-			<th>
-				<div class="flex justify-content-between align-items-center">
-					Date
-					<p-sortIcon field="date"></p-sortIcon>
-					<p-columnFilter
-						type="date"
-						field="date"
-						display="menu"
-						class="ml-auto"
-						[showMatchModes]="true" [showOperator]="false" [showAddButton]="false"
-						[matchModeOptions]="this.customMatchModeOptions"
-						>
-						<!--<ng-template pTemplate="filter">
-							<input type="text" [(ngModel)]="filterValue" placeholder="Filter">
-						  </ng-template> -->
-						<ng-template pTemplate="filter" let-filter="filterCallback">
-							<!--<p-calendar (onSelect)="customIs($event)" dateFormat="dd-mm-yy"></p-calendar>-->
-							<p-calendar (onSelect)="onDateSelect($event)" [style]="{'width':'100%'}" selectionMode="range" [readonlyInput]="true" (onClearClick)="onDateClear($event)" [showButtonBar]="true" placeholder="Created Date" class="p-column-filter" dateFormat="yy-mm-dd"></p-calendar>
-						 </ng-template>
-					</p-columnFilter>
-				</div>
-				<!--<input type="text" [(ngModel)]="filterValue" placeholder="Filter" (input)="table.filter($event, 'date', 'customDateFilter')"> -->
+		</tr>
+		<tr>
+			<th *ngFor="let col of columns">
+				<p-columnFilter type="text" [field]="col.field" [matchModeOptions]="matchModeOptions"
+					[matchMode]="'custom-equals'"></p-columnFilter>
 			</th>
 		</tr>
 	</ng-template>
-
-	<ng-template pTemplate="body" let-tutorial>
-		<tr class="p-selectable-row">
-			<td>
-				<p-tableCheckbox [value]="tutorial"> </p-tableCheckbox>
-			</td>
-			<td>
-				<span class="p-column-title"> Title </span>
-				{{ tutorial.title }}
-			</td>
-			<td>
-				<span class="p-column-title"> Category </span>
-				<span class="image-text">
-					{{ tutorial.category }}
-				</span>
-			</td>
-			<td>
-				<span class="p-column-title"> Rating </span>
-				<span class="image-text">
-					{{ tutorial.rating }}
-				</span>
-			</td>
-			<td>
-				<span class="p-column-title"> Date </span>
-				<span class="image-text">
-					{{ tutorial.date }}
-				</span>
+	<ng-template pTemplate="body" let-rowData let-columns="columns">
+		<tr [pSelectableRow]="rowData">
+			<td *ngFor="let col of columns">
+				{{rowData[col.field]}}
 			</td>
 		</tr>
 	</ng-template>
