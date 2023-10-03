@@ -86,18 +86,24 @@ export class AppComponent {
     // Filter based on dateFilterValue
     this.filteredCars = this.cars.filter(car => {
       if (this.beginDateFilterValue) {
-		//alert(car.date)
-        //const carDate = new Date(car.date); // Assuming tutorial.date is a string
         return car.date === moment(this.beginDateFilterValue).format("DD-MM-YYYY").toString();
       }
-      return true; // If no filter value, return all
+      return true; 
     });
-	console.log(this.filteredCars)
 	this.cars = this.filteredCars;
   }
 
   applyFilterEnd() {
-
+	this.carService.getCarsMedium().then(cars => (this.cars = cars));
+	this.filteredCars = this.cars.filter(car => {
+		if (this.beginDateFilterValue && this.endDateFilterValue) {
+			//alert("car date"+moment(car.date, 'DD-MM-YYYY')+"begin"+moment(this.beginDateFilterValue)+"end"+moment(this.endDateFilterValue))
+		  return moment(car.date, 'DD-MM-YYYY').isBetween(moment(this.beginDateFilterValue), moment(this.endDateFilterValue)) 
+		}
+		return true;
+	  });
+	  console.log(this.filteredCars)
+	  this.cars = this.filteredCars;
   }
 
 
