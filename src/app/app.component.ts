@@ -53,7 +53,7 @@ export class AppComponent {
     ];
 
 	this.matchModeOptionsForDateType = [
-		{ label: "Custom Equals", value: customFilterName },
+		//{ label: "Custom Equals", value: customFilterName },
 	];
 
 	this.cols = [
