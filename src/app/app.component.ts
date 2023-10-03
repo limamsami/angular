@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
 import { Car } from "./car";
 import { CarService } from "./carservice";
+import * as moment from 'moment';
 
 @Component({
   selector: "app-root",
@@ -26,7 +27,7 @@ export class AppComponent {
     this.filterService.register(
       customFilterName,
       (value:any, filter:any): boolean => {
-        if (filter === undefined || filter === null || filter.trim() === "") {
+        if (filter === undefined || filter === null) {
           return true;
         }
 
@@ -34,7 +35,7 @@ export class AppComponent {
           return false;
         }
 
-        return value.toString() === filter.toString();
+        return value.toString() === moment(filter).format("DD-MM-YYYY").toString();
       }
     );
 
