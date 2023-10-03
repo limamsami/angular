@@ -11,6 +11,7 @@ import * as moment from 'moment';
 export class AppComponent {
   cars: Car[] = [];
   filteredCars: Car[] = [];
+  originalCars: Car[] = [];
 
   cols: any[] = [];
 
@@ -63,7 +64,7 @@ export class AppComponent {
 		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType }
 	  ];
 
-    this.carService.getCarsMedium().then(cars => (this.cars = cars));
+    this.carService.getCarsMedium().then(cars => {this.cars = cars;this.originalCars= cars});
   }
 
   onBeginDateFilterSelect(event: any) {
@@ -84,7 +85,7 @@ export class AppComponent {
 
   applyFilterBegin() {
     // Filter based on dateFilterValue
-    this.filteredCars = this.cars.filter(car => {
+    this.filteredCars = this.originalCars.filter(car => {
       if (this.beginDateFilterValue) {
         return car.date === moment(this.beginDateFilterValue).format("DD-MM-YYYY").toString();
       }
@@ -94,11 +95,16 @@ export class AppComponent {
   }
 
   applyFilterEnd() {
-	this.carService.getCarsMedium().then(cars => (this.cars = cars));
-	this.filteredCars = this.cars.filter(car => {
+
+	//alert(this.originalCars.length)
+	this.filteredCars = [];
+	this.filteredCars = this.originalCars.filter(car => {
+		
 		if (this.beginDateFilterValue && this.endDateFilterValue) {
+			//alert(car.date)
 			//alert("car date"+moment(car.date, 'DD-MM-YYYY')+"begin"+moment(this.beginDateFilterValue)+"end"+moment(this.endDateFilterValue))
-		  return moment(car.date, 'DD-MM-YYYY').isBetween(moment(this.beginDateFilterValue), moment(this.endDateFilterValue)) 
+		  //return moment(car.date, 'DD-MM-YYYY').isBetween(moment(this.beginDateFilterValue), moment(this.endDateFilterValue)) 
+		  return moment(car.date, 'DD-MM-YYYY').isSameOrAfter(moment(this.beginDateFilterValue)) && moment(car.date, 'DD-MM-YYYY').isSameOrBefore(moment(this.endDateFilterValue))
 		}
 		return true;
 	  });
