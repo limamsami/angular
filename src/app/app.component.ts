@@ -17,7 +17,8 @@ export class AppComponent {
   matchModeOptions: SelectItem[] = [];
   matchModeOptionsForDateType: SelectItem[] = [];
 
-  dateFilterValue: Date | null = null;
+  beginDateFilterValue: Date | null = null;
+  endDateFilterValue: Date | null = null;
 
   constructor(
     private carService: CarService,
@@ -67,20 +68,19 @@ export class AppComponent {
 
   onDateFilterSelect(event: any) {
     // Handle date filter selection
-    this.dateFilterValue = event;
+    this.beginDateFilterValue = event;
 
     // Apply filter
-    this.applyFilter();
+    this.applyFilterBegin();
   }
 
-  applyFilter() {
-	alert(this.dateFilterValue)
+  applyFilterBegin() {
     // Filter based on dateFilterValue
     this.filteredCars = this.cars.filter(car => {
-      if (this.dateFilterValue) {
+      if (this.beginDateFilterValue) {
 		//alert(car.date)
         //const carDate = new Date(car.date); // Assuming tutorial.date is a string
-        return car.date === moment(this.dateFilterValue).format("DD-MM-YYYY").toString();
+        return car.date === moment(this.beginDateFilterValue).format("DD-MM-YYYY").toString();
       }
       return true; // If no filter value, return all
     });

@@ -10,7 +10,9 @@
 				<p-columnFilter type="{{col.type}}" [field]="col.field" [matchModeOptions]="col.matchModeOptions"
 					[matchMode]="'custom-equals'">
 					<ng-template *ngIf="col.type == 'date'" pTemplate="filter" let-filter="filterCallback">
-						<p-calendar  [(ngModel)]="dateFilterValue"
+						<p-calendar  [(ngModel)]="beginDateFilterValue"
+						(onSelect)="onDateFilterSelect($event)" dateFormat="dd-mm-yy"></p-calendar>
+						<p-calendar  [(ngModel)]="endDateFilterValue"
 						(onSelect)="onDateFilterSelect($event)" dateFormat="dd-mm-yy"></p-calendar>
 					 </ng-template>
 				
