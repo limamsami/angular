@@ -41,7 +41,7 @@ export class AppComponent {
       { field: "year", header: "Year" },
       { field: "brand", header: "Brand" },
       { field: "color", header: "Color" },
-      { field: "vin", header: "Vin" }
+      { field: "date", header: "Date" }
     ];
 
     this.matchModeOptions = [
