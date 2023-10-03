@@ -38,10 +38,10 @@ export class AppComponent {
     );
 
     this.cols = [
-      { field: "year", header: "Year" },
-      { field: "brand", header: "Brand" },
-      { field: "color", header: "Color" },
-      { field: "date", header: "Date" }
+      { field: "year", header: "Year", type: "numeric" },
+      { field: "brand", header: "Brand", type: "text" },
+      { field: "color", header: "Color", type: "text" },
+      { field: "date", header: "Date", type: "date" }
     ];
 
     this.matchModeOptions = [
