@@ -13,6 +13,7 @@ export class AppComponent {
   cols: any[] = [];
 
   matchModeOptions: SelectItem[] = [];
+  matchModeOptionsForDateType: SelectItem[] = [];
 
   constructor(
     private carService: CarService,
@@ -37,18 +38,21 @@ export class AppComponent {
       }
     );
 
-    this.cols = [
-      { field: "year", header: "Year", type: "numeric" },
-      { field: "brand", header: "Brand", type: "text" },
-      { field: "color", header: "Color", type: "text" },
-      { field: "date", header: "Date", type: "date" }
-    ];
-
     this.matchModeOptions = [
-      { label: "Custom Equals", value: customFilterName },
       { label: "Starts With", value: FilterMatchMode.STARTS_WITH },
       { label: "Contains", value: FilterMatchMode.CONTAINS }
     ];
+
+	this.matchModeOptionsForDateType = [
+		{ label: "Custom Equals", value: customFilterName },
+	];
+
+	this.cols = [
+		{ field: "year", header: "Year", type: "numeric", matchModeOptions: this.matchModeOptions },
+		{ field: "brand", header: "Brand", type: "text", matchModeOptions: this.matchModeOptions },
+		{ field: "color", header: "Color", type: "text", matchModeOptions: this.matchModeOptions },
+		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType }
+	  ];
 
     this.carService.getCarsMedium().then(cars => (this.cars = cars));
   }

@@ -7,7 +7,7 @@
 		</tr>
 		<tr>
 			<th *ngFor="let col of columns">
-				<p-columnFilter type="{{col.type}}" [field]="col.field" [matchModeOptions]="matchModeOptions"
+				<p-columnFilter type="{{col.type}}" [field]="col.field" [matchModeOptions]="col.matchModeOptions"
 					[matchMode]="'custom-equals'"></p-columnFilter>
 			</th>
 		</tr>
