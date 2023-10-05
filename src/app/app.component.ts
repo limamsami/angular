@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
 import { Car } from "./car";
 import { CarService } from "./carservice";
+import * as FileSaver from 'file-saver';
+import autoTable from 'jspdf-autotable'
 
 @Component({
   selector: "app-root",
@@ -11,6 +13,8 @@ export class AppComponent {
   cars: Car[] = [];
 
   cols: any[] = [];
+
+  exportColumns: any[] = [];
 
   matchModeOptions: SelectItem[] = [];
 
@@ -44,6 +48,8 @@ export class AppComponent {
       { field: "vin", header: "Vin" }
     ];
 
+    this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+
     this.matchModeOptions = [
       { label: "Custom Equals", value: customFilterName },
       { label: "Starts With", value: FilterMatchMode.STARTS_WITH },
@@ -52,4 +58,47 @@ export class AppComponent {
 
     this.carService.getCarsMedium().then(cars => (this.cars = cars));
   }
+
+  exportPdf() {
+    const data = [
+      [1, 'Finland', 7.632, 'Helsinki'],
+      [2, 'Norway', 7.594, 'Oslo'],
+      [3, 'Denmark', 7.555, 'Copenhagen'],
+      [4, 'Iceland', 7.495, 'Reykjavík'],
+      [5, 'Switzerland', 7.487, 'Bern'],
+      [9, 'Sweden', 7.314, 'Stockholm'],
+      [73, 'Belarus', 5.483, 'Minsk'],
+  ]
+
+    import("jspdf").then(jsPDF => {
+        import("jspdf-autotable").then(x => {
+            const doc = new jsPDF.default("landscape", "mm", "a4");
+            autoTable(doc, {
+              head: this.exportColumns,
+              body: data,
+              didDrawCell: (data) => { },
+          });
+            //doc.autoTable(this.exportColumns, this.cars);
+            doc.save('cars.pdf');
+        })
+    })
+}
+
+exportExcel() {
+    import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(this.cars);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, "cars");
+    });
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
 }
