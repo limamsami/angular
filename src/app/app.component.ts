@@ -12,7 +12,9 @@ import autoTable from 'jspdf-autotable'
 export class AppComponent {
   cars: Car[] = [];
 
-  cols: any[] = [];
+  
+
+  cols: Col[] = [];
   selectedColumns: any[] = [];
 
   exportColumns: any[] = [];
@@ -43,13 +45,6 @@ export class AppComponent {
       }
     );
 
-    this.cols = [
-      { field: "year", header: "Year" },
-      { field: "brand", header: "Brand" },
-      { field: "color", header: "Color" },
-      { field: "vin", header: "Vin" }
-    ];
-
     this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
 
     this.matchModeOptions = [
@@ -64,9 +59,9 @@ export class AppComponent {
 	];
 
 	this.cols = [
-		{ field: "year", header: "Year", type: "numeric", matchModeOptions: this.matchModeOptions },
+		{ field: "year", header: "Année", type: "numeric", matchModeOptions: this.matchModeOptions },
 		{ field: "brand", header: "Brand", type: "text", matchModeOptions: this.matchModeOptions },
-		{ field: "color", header: "Color", type: "text", matchModeOptions: this.matchModeOptions },
+		{ field: "color", header: "Couleur", type: "text", matchModeOptions: this.matchModeOptions },
 		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType }
 	  ];
 
@@ -108,12 +103,24 @@ export class AppComponent {
 }
 
 exportExcel() {
+  const worksheetData = this.cars.map(car => {
+    const rowData: { [header: string]: any } = {};
+    this.cols.forEach(col => {
+      rowData[col.header] = car[col.field];
+    });
+    return rowData;
+  });
+
     import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.cars);
+        const worksheet = xlsx.utils.json_to_sheet(worksheetData);
         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
         this.saveAsExcelFile(excelBuffer, "cars");
     });
+}
+
+action() {
+  alert(this.selectedColumns[0].field)
 }
 
 saveAsExcelFile(buffer: any, fileName: string): void {
@@ -124,4 +131,11 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
+}
+type FieldName = keyof Car;
+interface Col {
+  field: FieldName;
+  header: string;
+type: string;
+ matchModeOptions: SelectItem[];
 }
