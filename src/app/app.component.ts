@@ -13,10 +13,12 @@ export class AppComponent {
   cars: Car[] = [];
 
   cols: any[] = [];
+  selectedColumns: any[] = [];
 
   exportColumns: any[] = [];
 
   matchModeOptions: SelectItem[] = [];
+  matchModeOptionsForDateType: SelectItem[] = [];
 
   constructor(
     private carService: CarService,
@@ -56,7 +58,28 @@ export class AppComponent {
       { label: "Contains", value: FilterMatchMode.CONTAINS }
     ];
 
-    this.carService.getCarsMedium().then(cars => (this.cars = cars));
+	this.matchModeOptionsForDateType = [
+		{ label: "Custom Equals", value: customFilterName },
+    { label: "Date is", value: FilterMatchMode.DATE_IS },
+	];
+
+	this.cols = [
+		{ field: "year", header: "Year", type: "numeric", matchModeOptions: this.matchModeOptions },
+		{ field: "brand", header: "Brand", type: "text", matchModeOptions: this.matchModeOptions },
+		{ field: "color", header: "Color", type: "text", matchModeOptions: this.matchModeOptions },
+		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType }
+	  ];
+
+    this.selectedColumns = this.cols
+
+    this.carService.getCarsMedium().then(cars => {this.cars = cars;
+      
+      this.cars.forEach(car => {
+        car.date = new Date(car.date);
+      });
+      console.log(this.cars);
+    });
+ 
   }
 
   exportPdf() {
