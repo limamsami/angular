@@ -7,6 +7,7 @@
             <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
 			<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
             selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>
+			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="action()" class="p-button-success mr-2"  pTooltip="ACTION" tooltipPosition="bottom"></button>
         </div>
     </ng-template>
 	<ng-template pTemplate="header" let-columns>
