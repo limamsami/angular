@@ -18,8 +18,7 @@
 		</tr>
 		<tr>
 			<th *ngFor="let col of columns">
-				<p-columnFilter type="text" [field]="col.field" [matchModeOptions]="matchModeOptions"
-					[matchMode]="'custom-equals'" display="{{displayFilter}}"></p-columnFilter>
+				<p-columnFilter type="{{col.type}}" [field]="col.field" display="{{displayFilter}}"></p-columnFilter>
 			</th>
 		</tr>
 	</ng-template>
