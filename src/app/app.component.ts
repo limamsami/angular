@@ -12,7 +12,7 @@ import autoTable from 'jspdf-autotable'
 export class AppComponent {
   cars: Car[] = [];
 
-  
+  displayFilter: string = "row"
 
   cols: Col[] = [];
   selectedColumns: any[] = [];

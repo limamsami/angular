@@ -5,8 +5,8 @@
             <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-success mr-2"  pTooltip="XLS" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
             <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
-			<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
-            selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>
+			<!--<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
+            selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>-->
 			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="action()" class="p-button-success mr-2"  pTooltip="ACTION" tooltipPosition="bottom"></button>
         </div>
     </ng-template>
@@ -19,7 +19,7 @@
 		<tr>
 			<th *ngFor="let col of columns">
 				<p-columnFilter type="text" [field]="col.field" [matchModeOptions]="matchModeOptions"
-					[matchMode]="'custom-equals'"></p-columnFilter>
+					[matchMode]="'custom-equals'" display="{{displayFilter}}"></p-columnFilter>
 			</th>
 		</tr>
 	</ng-template>
