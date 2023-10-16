@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
 		InputTextModule,
 		CalendarModule,
     HttpClientModule,
-    MultiSelectModule
+    MultiSelectModule,
+    TooltipModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ],

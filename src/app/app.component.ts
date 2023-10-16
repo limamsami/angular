@@ -1,15 +1,22 @@
-import { Component } from "@angular/core";
+import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
 import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
 import { Car } from "./car";
 import { CarService } from "./carservice";
 import * as FileSaver from 'file-saver';
-import autoTable from 'jspdf-autotable'
+import autoTable from 'jspdf-autotable';
+import { Table } from "primeng/table";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html"
 })
 export class AppComponent {
+
+  @ViewChild("mydt", { static: false }) public dt: Table | undefined;
+  
+  filterModeIcon = "pi pi-filter" ;
+  filterModeTooltip = "menu_mode" ;
+
   cars: Car[] = [];
 
   displayFilter: string = "menu"
@@ -22,12 +29,25 @@ export class AppComponent {
   matchModeOptions: SelectItem[] = [];
   matchModeOptionsForDateType: SelectItem[] = [];
 
+  changeHeaderFiltersMode: string = "menu";
+
+  showHeaderFilters: boolean = true
+
   constructor(
     private carService: CarService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private _cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
+    if(this.changeHeaderFiltersMode === "menu" && this.filterModeTooltip === "menu_mode"){
+      this.filterModeTooltip = "row_mode";
+      this.filterModeIcon = "pi pi-check";
+    } else {
+      this.filterModeTooltip = "menu_mode";
+      this.filterModeIcon = "pi pi-ellipsis-v";
+    }
+
     const customFilterName = "custom-equals";
 
     this.filterService.register(
@@ -59,10 +79,10 @@ export class AppComponent {
 	];
 
 	this.cols = [
-		{ field: "year", header: "Année", type: "numeric", matchModeOptions: this.matchModeOptions },
-		{ field: "brand", header: "Brand", type: "text", matchModeOptions: this.matchModeOptions },
-		{ field: "color", header: "Couleur", type: "text", matchModeOptions: this.matchModeOptions },
-		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType }
+		{ field: "year", header: "year", type: "numeric", matchModeOptions: this.matchModeOptions, filterValue: null },
+		{ field: "brand", header: "brand", type: "text", matchModeOptions: this.matchModeOptions, filterValue: null },
+		{ field: "color", header: "Couleur", type: "text", matchModeOptions: this.matchModeOptions, filterValue: null },
+		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType, filterValue: null }
 	  ];
 
     this.selectedColumns = this.cols
@@ -119,8 +139,17 @@ exportExcel() {
     });
 }
 
-action() {
-  alert(this.selectedColumns[0].field)
+action(table: Table) {
+  //alert(this.selectedColumns[0].field)
+  this._cdRef.detectChanges()
+  this.cols.forEach(col => {
+    col.filterValue = null;
+  });
+
+  //table.clear()
+
+  this.dt?._filter()
+  
 }
 
 saveAsExcelFile(buffer: any, fileName: string): void {
@@ -131,6 +160,22 @@ saveAsExcelFile(buffer: any, fileName: string): void {
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
 }
+
+toggleHeaderFiltersMode(){
+  if(this.filterModeTooltip === "menu_mode"){
+    this.changeHeaderFiltersMode = "menu";
+    this.filterModeIcon = "pi pi-echeck";
+    this.filterModeTooltip = "row_mode";
+    this._cdRef.detectChanges()
+    //this.showHeaderFilters = false
+  } else { 
+    this.changeHeaderFiltersMode = "row";
+    this.filterModeIcon = "pi pi-ellipsis-v";
+    this.filterModeTooltip = "menu_mode";
+    //this.showHeaderFilters = false
+    this._cdRef.detectChanges()
+  }
+}
 }
 type FieldName = keyof Car;
 interface Col {
@@ -138,4 +183,5 @@ interface Col {
   header: string;
 type: string;
  matchModeOptions: SelectItem[];
+ filterValue: any;
 }

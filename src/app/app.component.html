@@ -7,7 +7,8 @@
             <button type="button" pButton pRipple icon="pi pi-filter" (click)="dt.exportCSV({selectionOnly:true})" class="p-button-info ml-auto" pTooltip="Selection Only" tooltipPosition="bottom"></button>
 			<!--<p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" optionLabel="header"
             selectedItemsLabel="{0} columns selected" [style]="{'min-width': '200px'}" placeholder="Choose Columns"></p-multiSelect>-->
-			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="action()" class="p-button-success mr-2"  pTooltip="ACTION" tooltipPosition="bottom"></button>
+			<button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="action(dt)" class="p-button-success mr-2"  pTooltip="ACTION" tooltipPosition="bottom"></button>
+			<button pButton pRipple [icon]="filterModeIcon" tooltipPosition="top" [pTooltip]="filterModeTooltip" class="p-button-primary" (click)="toggleHeaderFiltersMode()"></button>
         </div>
     </ng-template>
 	<ng-template pTemplate="header" let-columns>
@@ -16,9 +17,15 @@
 				{{col.header}}
 			</th>
 		</tr>
-		<tr>
+		<tr *ngIf="showHeaderFilters">
 			<th *ngFor="let col of columns">
-				<p-columnFilter type="{{col.type}}" [field]="col.field" display="{{displayFilter}}"></p-columnFilter>
+				<!--{{col.type}}{{col.field}}{{changeHeaderFiltersMode}}-->
+				<p-columnFilter [type]="col.type" [field]="col.field" [display]="changeHeaderFiltersMode">
+					<!--<ng-template *ngIf="col.type == 'text'" pTemplate="filter" let-filter="filterCallback">
+						<input value=""> 
+					</ng-template>-->
+						
+				</p-columnFilter>
 			</th>
 		</tr>
 	</ng-template>
