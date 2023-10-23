@@ -133,13 +133,33 @@ exportExcel() {
 
     import("xlsx").then(xlsx => {
       // Calculate sum for numeric columns
-const sumAge = this.calculateColumnSum(worksheetData, 'Prix');
+      const sommes = this.cols.map(col => {
+        if (col.type === 'numeric') {
+          return this.calculateColumnSum(worksheetData, col.header)
+        } else {
+          return null
+        }
+      }
 
-// Create a new row with the sums
-const sumRow = { year: 'Total:', brand: null, Prix: sumAge, Date: '' };
+      )
+      console.log("sommes "+sommes)
+      const headers = this.cols.map(col => col.header);
+      const titlesObject = headers.reduce((acc, header, index) => {
+        if (sommes[index] != null) {
+          acc[header] = 'Total'
+        } else {
+          acc[header] = ''
+        } 
+        return acc;
+      }, {} as { [key: string]: string | null });
+      const sumsObject = headers.reduce((acc, header, index) => {
+        acc[header] = sommes[index];
+        return acc;
+      }, {} as { [key: string]: number | null });
+      console.log('Sums by column header:', sumsObject);
 
-// Append the sum row to the data
-const dataWithSumRow = [...worksheetData, sumRow];
+
+        const dataWithSumRow = [...worksheetData, titlesObject, sumsObject];
         const worksheet = xlsx.utils.json_to_sheet(dataWithSumRow);
         worksheet['!cols'] = [];
         this.getDifferences(this.cols, this.selectedColumns).forEach( (index:number) =>
