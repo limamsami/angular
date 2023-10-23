@@ -81,7 +81,7 @@ export class AppComponent {
 	this.cols = [
 		{ field: "year", header: "year", type: "numeric", matchModeOptions: this.matchModeOptions, filterValue: null },
 		{ field: "brand", header: "brand", type: "text", matchModeOptions: this.matchModeOptions, filterValue: null },
-		{ field: "color", header: "Couleur", type: "text", matchModeOptions: this.matchModeOptions, filterValue: null },
+		{ field: "price", header: "Prix", type: "numeric", matchModeOptions: this.matchModeOptions, filterValue: null },
 		{ field: "date", header: "Date", type: "date", matchModeOptions: this.matchModeOptionsForDateType, filterValue: null }
 	  ];
 
@@ -132,11 +132,37 @@ exportExcel() {
   });
 
     import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(worksheetData);
+      // Calculate sum for numeric columns
+const sumAge = this.calculateColumnSum(worksheetData, 'Prix');
+
+// Create a new row with the sums
+const sumRow = { year: 'Total:', brand: null, Prix: sumAge, Date: '' };
+
+// Append the sum row to the data
+const dataWithSumRow = [...worksheetData, sumRow];
+        const worksheet = xlsx.utils.json_to_sheet(dataWithSumRow);
+        worksheet['!cols'] = [];
+        this.getDifferences(this.cols, this.selectedColumns).forEach( (index:number) =>
+        worksheet['!cols']!![index] = { hidden: true }
+        );
         const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
         this.saveAsExcelFile(excelBuffer, "cars");
     });
+}
+
+getDifferences(input: Col[], output: Col[]) : number[] {
+  let differences: number[] = []
+
+  input.forEach((inputCol, index) => {
+    const foundCol = output.find(outputCol => inputCol.header === outputCol.header);
+    if (!foundCol) {
+      differences.push(index);
+    }
+  });
+
+  return differences
+
 }
 
 action(table: Table) {
@@ -148,7 +174,8 @@ action(table: Table) {
 
   //table.clear()
 
-  this.dt?._filter()
+  //this.dt?._filter()
+  alert("differences"+this.getDifferences(this.cols, this.selectedColumns))
   
 }
 
@@ -176,6 +203,18 @@ toggleHeaderFiltersMode(){
     this._cdRef.detectChanges()
   }
 }
+
+calculateColumnSum(data: any[], columnName: string): number {
+  let sum = 0;
+  for (const item of data) {
+    if (typeof item[columnName] === 'number') {
+      sum += item[columnName];
+    }
+  }
+  return sum;
+}
+
+
 }
 type FieldName = keyof Car;
 interface Col {
