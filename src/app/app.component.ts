@@ -12,7 +12,7 @@ import { Table } from "primeng/table";
 })
 export class AppComponent {
 
-  @ViewChild("mydt", { static: false }) public dt: Table | undefined;
+  @ViewChild("dt", { static: false }) public dt: Table | undefined;
   
   filterModeIcon = "pi pi-filter" ;
   filterModeTooltip = "menu_mode" ;
@@ -242,8 +242,13 @@ toggleHeaderFiltersMode(){
     this.changeHeaderFiltersMode = "row";
     this.filterModeIcon = "pi pi-ellipsis-v";
     this.filterModeTooltip = "menu_mode";
-    //this.showHeaderFilters = false
-    this._cdRef.detectChanges()
+    //alert("row mode")
+    //this._cdRef.detectChanges()
+    this.dt!!.filters['brand'] = { value: null, matchMode: undefined }
+    this.dt!!.filters['year'] = { value: null, matchMode: undefined }
+    this.dt!!.filters['price'] = { value: null, matchMode: undefined }
+    this.dt!!.filters['date'] = { value: null, matchMode: undefined }
+    this.dt!!._filter()
   }
 }
 
