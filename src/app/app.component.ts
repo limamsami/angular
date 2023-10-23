@@ -202,10 +202,20 @@ action(table: Table) {
 //table._filter()
 
   //table.reset()
-  table.filter('', 'brand', 'contains'); 
+  //table.filter('', 'brand', 'contains'); 
   //this.dt?._filter()
   //alert("differences"+this.getDifferences(this.cols, this.selectedColumns))
-  
+
+        table.filters['brand'] = { value: null, matchMode: undefined }
+        table.filters['year'] = { value: null, matchMode: undefined }
+        table.filters['price'] = { value: null, matchMode: undefined }
+        table.filters['date'] = { value: null, matchMode: undefined }
+        table._filter()
+
+        //table.clearFilterValues()
+
+        
+        
 }
 
 onFiltering(event: any) {
