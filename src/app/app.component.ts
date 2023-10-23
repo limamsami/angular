@@ -33,6 +33,8 @@ export class AppComponent {
 
   showHeaderFilters: boolean = true
 
+  filterValues: { [key: string]: any } = {};
+
   constructor(
     private carService: CarService,
     private filterService: FilterService,
@@ -187,16 +189,27 @@ getDifferences(input: Col[], output: Col[]) : number[] {
 
 action(table: Table) {
   //alert(this.selectedColumns[0].field)
-  this._cdRef.detectChanges()
+  /* this._cdRef.detectChanges()
   this.cols.forEach(col => {
-    col.filterValue = null;
-  });
+    //col.filterValue = null;
+    this.filterValues[col.field] = null;
+  }); */
 
-  //table.clear()
+  //delete table.filters['brand']
+  //delete table.filters['year']
+  //delete table.filters['prix']
+  //delete table.filters['date']
+//table._filter()
 
+  //table.reset()
+  table.filter('', 'brand', 'contains'); 
   //this.dt?._filter()
-  alert("differences"+this.getDifferences(this.cols, this.selectedColumns))
+  //alert("differences"+this.getDifferences(this.cols, this.selectedColumns))
   
+}
+
+onFiltering(event: any) {
+  console.log('Filtered value: '+ JSON.stringify(event.filters));
 }
 
 saveAsExcelFile(buffer: any, fileName: string): void {

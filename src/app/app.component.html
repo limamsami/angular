@@ -21,9 +21,9 @@
 			<th *ngFor="let col of columns">
 				<!--{{col.type}}{{col.field}}{{changeHeaderFiltersMode}}-->
 				<p-columnFilter [type]="col.type" [field]="col.field" [display]="changeHeaderFiltersMode">
-					<!--<ng-template *ngIf="col.type == 'text'" pTemplate="filter" let-filter="filterCallback">
-						<input value=""> 
-					</ng-template>-->
+					<!-- <ng-template *ngIf="col.type == 'text'" pTemplate="filter" let-filter="filterCallback">
+						<input [value]="dt.filters['{{col.field}}'] ? dt.filters['{{col.field}}'] : ''" > 
+					</ng-template> -->
 						
 				</p-columnFilter>
 			</th>
