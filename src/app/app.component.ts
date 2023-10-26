@@ -14,7 +14,7 @@ export class AppComponent {
 
   @ViewChild("dt", { static: false }) public dt: Table | undefined;
   
-  filterModeIcon = "pi pi-filter" ;
+  filterModeIcon = "pi pi-echeck" ;
   filterModeTooltip = "menu_mode" ;
 
   cars: Car[] = [];
@@ -188,6 +188,7 @@ getDifferences(input: Col[], output: Col[]) : number[] {
 }
 
 action(table: Table) {
+  alert("filterModeTooltip "+this.filterModeTooltip)
   //alert(this.selectedColumns[0].field)
   /* this._cdRef.detectChanges()
   this.cols.forEach(col => {
@@ -206,11 +207,11 @@ action(table: Table) {
   //this.dt?._filter()
   //alert("differences"+this.getDifferences(this.cols, this.selectedColumns))
 
-        table.filters['brand'] = { value: null, matchMode: undefined }
+        /* table.filters['brand'] = { value: null, matchMode: undefined }
         table.filters['year'] = { value: null, matchMode: undefined }
         table.filters['price'] = { value: null, matchMode: undefined }
         table.filters['date'] = { value: null, matchMode: undefined }
-        table._filter()
+        table._filter() */
 
         //table.clearFilterValues()
 
@@ -234,9 +235,9 @@ saveAsExcelFile(buffer: any, fileName: string): void {
 toggleHeaderFiltersMode(){
   if(this.filterModeTooltip === "menu_mode"){
     this.changeHeaderFiltersMode = "menu";
-    this.filterModeIcon = "pi pi-echeck";
+    this.filterModeIcon = "pi pi-check";
     this.filterModeTooltip = "row_mode";
-    this._cdRef.detectChanges()
+    //this._cdRef.detectChanges()
     //this.showHeaderFilters = false
   } else { 
     this.changeHeaderFiltersMode = "row";
@@ -244,10 +245,14 @@ toggleHeaderFiltersMode(){
     this.filterModeTooltip = "menu_mode";
     //alert("row mode")
     //this._cdRef.detectChanges()
-    this.dt!!.filters['brand'] = { value: null, matchMode: undefined }
+  /*   this.dt!!.filters['brand'] = { value: null, matchMode: undefined }
     this.dt!!.filters['year'] = { value: null, matchMode: undefined }
     this.dt!!.filters['price'] = { value: null, matchMode: undefined }
-    this.dt!!.filters['date'] = { value: null, matchMode: undefined }
+    this.dt!!.filters['date'] = { value: null, matchMode: undefined } */
+
+    for (const col of this.cols) {
+      this.dt!!.filters[col.field] = { value: null, matchMode: undefined };
+    }
     this.dt!!._filter()
   }
 }
