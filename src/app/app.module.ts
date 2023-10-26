@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent }   from './app.component';
-import {CarService} from './carservice';
 import { CalendarModule } from 'primeng/calendar';
 import {ToastModule} from 'primeng/toast';
 import {ButtonModule} from 'primeng/button';
@@ -31,7 +30,7 @@ import { TooltipModule } from 'primeng/tooltip';
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ],
-  providers: [CarService]
+  providers: []
 })
 
 export class AppModule { }
