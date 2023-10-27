@@ -16,6 +16,9 @@ import { TooltipModule } from 'primeng/tooltip';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
+import { CreateCompanyComponent } from './create-company/create-company.component';
+import { PopupModelComponent } from './utils/popup-model/popup-model.component';
+
 
 @NgModule({
   imports: [
@@ -31,7 +34,7 @@ import { MainHeaderComponent } from './main-header/main-header.component';
     MultiSelectModule,
     TooltipModule
   ],
-  declarations: [ AppComponent, SideBarComponent, MainWrapperComponent, MainHeaderComponent ],
+  declarations: [ AppComponent, SideBarComponent, MainWrapperComponent, MainHeaderComponent, CreateCompanyComponent, PopupModelComponent ],
   bootstrap: [ AppComponent ],
   providers: []
 })

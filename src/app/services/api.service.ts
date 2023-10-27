@@ -31,6 +31,7 @@ export class ApiService {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer '
     });
+    console.log(company);
     let options = { headers: headers };
     return this.http.post<any>(environment.companyContactsCtrl.create,company, options);
   }
@@ -40,6 +41,14 @@ export class ApiService {
         'Authorization': 'Bearer '
     });
     let options = { headers: headers };
-    return this.http.delete<any>(environment.companyContactsCtrl.update+'/'+id, options);
+    return this.http.put<any>(environment.companyContactsCtrl.update+'/'+id, options);
+  }
+  deleteCompany(id:any): Observable<any> {
+    let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '
+    });
+    let options = { headers: headers };
+    return this.http.delete<any>(environment.companyContactsCtrl.delete+'/'+id, options);
   }
 }
