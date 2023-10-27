@@ -13,6 +13,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
+import { CreateSocieteComponent } from './create-societe/create-societe.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { TooltipModule } from 'primeng/tooltip';
     MultiSelectModule,
     TooltipModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, CreateSocieteComponent ],
   bootstrap: [ AppComponent ],
   providers: []
 })
