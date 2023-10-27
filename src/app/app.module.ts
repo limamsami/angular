@@ -16,6 +16,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { CreateSocieteComponent } from './create-societe/create-societe.component';
 import { RouterModule } from '@angular/router';
 import routes from './app-routing.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import routes from './app-routing.module';
     TooltipModule,
     RouterModule.forRoot(routes)
   ],
-  declarations: [ AppComponent, CreateSocieteComponent ],
+  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent ],
   bootstrap: [ AppComponent ],
   providers: []
 })
