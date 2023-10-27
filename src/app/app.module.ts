@@ -13,6 +13,9 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { MainWrapperComponent } from './main-wrapper/main-wrapper.component';
+import { MainHeaderComponent } from './main-header/main-header.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,7 @@ import { TooltipModule } from 'primeng/tooltip';
     MultiSelectModule,
     TooltipModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, SideBarComponent, MainWrapperComponent, MainHeaderComponent ],
   bootstrap: [ AppComponent ],
   providers: []
 })
