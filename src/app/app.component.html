@@ -1,3 +1,4 @@
+<router-outlet></router-outlet>
 <!-- Preloader -->
 <div class="preloader" style="display: none;">
 	<img src="assets/images/logos/favicon.ico" alt="loader" class="lds-ripple img-fluid">
@@ -350,6 +351,9 @@
 				</div>
 				<a href="javascript:void(0)" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
 				  <i class="ti ti-users text-white me-1 fs-5"></i>Ajouter une Societe</a>
+				  <p-button icon="pi pi-plus" iconPos="left" styleClass="btn btn-info d-flex align-items-center"
+                    (onClick)="router.navigate(['create-societe'])"
+                    [label]="'Ajouter une Societe'"></p-button>
 			  </div>
 			</div>
 		  </div>

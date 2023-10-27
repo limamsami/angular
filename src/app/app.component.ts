@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
 
 
@@ -13,7 +14,7 @@ export class AppComponent {
   
 
   constructor(
-    
+    public router: Router
   ) {}
 
   ngOnInit() {

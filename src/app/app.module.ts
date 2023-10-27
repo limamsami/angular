@@ -14,6 +14,8 @@ import {InputTextModule} from 'primeng/inputtext';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
 import { CreateSocieteComponent } from './create-societe/create-societe.component';
+import { RouterModule } from '@angular/router';
+import routes from './app-routing.module';
 
 @NgModule({
   imports: [
@@ -27,7 +29,8 @@ import { CreateSocieteComponent } from './create-societe/create-societe.componen
 		CalendarModule,
     HttpClientModule,
     MultiSelectModule,
-    TooltipModule
+    TooltipModule,
+    RouterModule.forRoot(routes)
   ],
   declarations: [ AppComponent, CreateSocieteComponent ],
   bootstrap: [ AppComponent ],
