@@ -4,10 +4,10 @@ export const environment = {
     production: false,
     urlApi: urlApi,
     companyContactsCtrl:{
-        getById:urlApi+'GetById',
+        getById:urlApi+'CompanyContacts/GetById',
         getAll:urlApi+'CompanyContacts/GetAll',
-        create:urlApi+'Create',
-        update:urlApi+'Update',
-        delete:urlApi+'Delete'
+        create:urlApi+'CompanyContacts/Create',
+        update:urlApi+'CompanyContacts/Update',
+        delete:urlApi+'CompanyContacts/Delete'
     }
 }
