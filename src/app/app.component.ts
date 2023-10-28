@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
-import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
+import { Component } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ApiService } from "./services/api.service";
+import { ConfirmDialogService } from "./services/confirm-dialog.service";
 
 
 @Component({
@@ -12,8 +14,10 @@ export class AppComponent {
   
   
 
-  constructor(
-    
+  constructor(public router: Router,
+    public route: ActivatedRoute,
+    public apiService: ApiService,
+    public confirm:ConfirmDialogService
   ) {}
 
   ngOnInit() {

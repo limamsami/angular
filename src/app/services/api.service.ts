@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { environment } from 'src/enviroments/enviorment';
+import { SharedtoolsService } from './sharedtools.service';
+import { ConfirmDialogService } from './confirm-dialog.service';
 
 @Injectable({
   providedIn: 'root'
@@ -51,4 +53,15 @@ export class ApiService {
     let options = { headers: headers };
     return this.http.delete<any>(environment.companyContactsCtrl.delete+'/'+id, options);
   }
+
+  async login(email: string, password: string): Promise<any> {
+    const body = { Username: email, Password: password };
+    try {
+        const response = await firstValueFrom(this.http.post(environment.usersCtrl.login, body));
+        return response;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
 }

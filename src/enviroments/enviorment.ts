@@ -9,5 +9,8 @@ export const environment = {
         create:urlApi+'CompanyContacts/Create',
         update:urlApi+'CompanyContacts/Update',
         delete:urlApi+'CompanyContacts/Delete'
+    },
+    usersCtrl: {
+        login: urlApi + 'Users/authenticate'
     }
 }
