@@ -15,7 +15,13 @@ export class LoginComponent {
  /**
   *
   */
- constructor(private router: Router,public app: AppComponent) {
+ ngOnInit(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  sessionStorage.setItem('userData', JSON.stringify(null));
+
+ }
+ constructor(public app: AppComponent) {
   
  }
   async setConnexion(_login: any, _mdp: any) {

@@ -17,7 +17,12 @@ export class ApiService {
     console.log('token: ',token)
     console.log('user: ',user)
     return token;
-}
+  }
+  isLoggedIn(){
+    const user: any = JSON.parse(sessionStorage.getItem('userData')!);
+    console.log(JSON.parse(sessionStorage.getItem('userData')!).token)
+    return user.token;
+  }
 
   getCompanyById(id:any): Observable<any> {
     let headers = new HttpHeaders({
