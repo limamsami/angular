@@ -408,9 +408,9 @@
 				</div>
 			  </div>
 			  <div class="modal-footer">
-				<button (click)="modificationMode()" id="btn-add" class="btn btn-success rounded-pill px-4" style="">Add</button>
-				<button id="btn-edit" class="btn btn-success rounded-pill px-4" style="display: none;">Save</button>
-				<button class="btn btn-danger rounded-pill px-4" data-bs-dismiss="modal" (onClick)="ngxSmartModalService.getModal('myModal').close()" > Discard </button>
+				<button (click)="modificationMode()" id="btn-add" class="btn btn-success rounded-pill px-4" style="display: none;">Add</button>
+				<button id="btn-edit" class="btn btn-success rounded-pill px-4" style="">Save</button>
+				<button class="btn btn-danger rounded-pill px-4" (click)="ngxSmartModalService.getModal('myModal').close()" > Discard </button>
 			  </div>
 		  </ngx-smart-modal>
 		  
