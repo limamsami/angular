@@ -29,7 +29,7 @@ export class LoginComponent {
 
     try {
         const response = await this.app.apiService.login(_login, _mdp);
-        console.log("login ==> ", response);
+        console.log("login ==> ", response.Result);
 
         const userLogged: any = response;
 

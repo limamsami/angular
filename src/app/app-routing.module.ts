@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo:'login',pathMatch:'full'},
+  
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent ,canActivate:[AuthGuard]},
   { path: 'create-societe', component: CreateSocieteComponent }

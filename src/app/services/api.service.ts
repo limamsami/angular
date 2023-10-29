@@ -18,9 +18,14 @@ export class ApiService {
     console.log('user: ',user)
     return token;
   }
+
   isLoggedIn(){
-    const user: any = JSON.parse(sessionStorage.getItem('userData')!);
-    console.log(JSON.parse(sessionStorage.getItem('userData')!).token)
+    const user = JSON.parse(sessionStorage.getItem('userData')!);
+    if (user==null) {
+      
+      return null;
+
+    }
     return user.token;
   }
 

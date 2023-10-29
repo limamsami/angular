@@ -10,10 +10,11 @@ export class AuthGuard implements CanActivate {
 
   constructor(private _api:ApiService,private router:Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if (this._api.isLoggedIn()) {
+    if (this._api.isLoggedIn()!==null) {
       return true;
     }
-    this.router.navigate(['/login/'])
+    console.log("jhfkjhgjhlkjhkjglvjkgjhfhjf")
+    this.router.navigate(['login'])
     return false;
   }
 }
