@@ -19,6 +19,7 @@ import routes from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { LoginComponent } from './login/login.component';
     RouterModule.forRoot(routes),
     NgxSmartModalModule.forRoot(),
   ],
-  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent,LoginComponent],
+  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent,LoginComponent, SignupComponent],
   bootstrap: [ AppComponent ],
   providers: []
 })

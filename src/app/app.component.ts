@@ -9,11 +9,6 @@ import { ApiService } from "./services/api.service";
   templateUrl: "./app.component.html"
 })
 export class AppComponent {
-
-  
-  
-  
-
   constructor(public apiService: ApiService,
 
     public router: Router

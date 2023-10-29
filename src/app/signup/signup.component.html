@@ -50,6 +50,14 @@
                   </div>-->
                   <div>
                     <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Firstname</label>
+                        <input [(ngModel)]="user.firstName"           class="form-control"  >
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Lastname</label>
+                        <input [(ngModel)]="user.lastName"           class="form-control"  >
+                      </div>
+                    <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Username</label>
                       <input [(ngModel)]="user.username"           class="form-control"  >
                     </div>
@@ -65,10 +73,10 @@
                         </label>
                       </div>
                     </div>
-                    <a (click)="setConnexion(user.username,user.password)" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</a>
-                    <div class="d-flex align-items-center justify-content-center">
-                      <p class="fs-4 mb-0 fw-medium">New here?</p>
-                      <a class="text-primary fw-medium ms-2" (click)="navigateToSignup()" >Create an account</a>
+                    <a (click)="signup(user)" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign up</a>
+                    <div href="" class="d-flex align-items-center justify-content-center">
+                      <p class="fs-4 mb-0 fw-medium">You have an account?</p>
+                      <a class="text-primary fw-medium ms-2" (click)="navigateToLogin()" >Login</a>
                     </div>
                   </div>
                 </div>

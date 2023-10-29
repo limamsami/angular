@@ -13,6 +13,8 @@ export const environment = {
 
     },
     usersCtrl: {
-        login: urlApi + 'Users/authenticate'
+        login: urlApi + 'Users/authenticate',
+        signup: urlApi + 'Users'
+
     }
 }

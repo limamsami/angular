@@ -5,10 +5,13 @@ import { CreateSocieteComponent } from './create-societe/create-societe.componen
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/auth-guard.service';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+
   { path: '', component: HomeComponent ,canActivate:[AuthGuard]},
   { path: 'create-societe', component: CreateSocieteComponent }
 ];

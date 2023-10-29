@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-
-import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { User } from '../company-contact/user';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent {
+export class SignupComponent {
 
   user=new User();
  /**
@@ -24,11 +22,12 @@ export class LoginComponent {
  constructor(public app: AppComponent) {
   
  }
-  async setConnexion(_login: any, _mdp: any) {
-    console.log("_login, _mdp ==> ", _login, _mdp);
+  async signup(user: any) {
+    console.log("user sginup  ==> ", user);
 
     try {
-        const response = await this.app.apiService.login(_login, _mdp);
+      await this.app.apiService.signup(user);
+        const response = await this.app.apiService.login(user.username,user.password);
         console.log("login ==> ", response.Result);
 
         const userLogged: any = response;
@@ -48,10 +47,8 @@ export class LoginComponent {
         console.error(error);
     }
 }
-navigateToSignup(){
-  let urlToRedirect = 'signup' ;
+navigateToLogin(){
+  let urlToRedirect = 'login' ;
   this.app.router.navigate([urlToRedirect]);
 }
-
-
 }

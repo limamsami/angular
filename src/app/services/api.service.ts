@@ -89,4 +89,14 @@ export class ApiService {
         throw error;
     }
 }
+
+async signup(user:any): Promise<any> {
+  try {
+      const response = await firstValueFrom(this.http.post(environment.usersCtrl.signup, user));
+      return response;
+  } catch (error) {
+      console.error(error);
+      throw error;
+  }
+}
 }
