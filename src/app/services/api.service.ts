@@ -12,10 +12,18 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getAutentication() {
+    const user: any = JSON.parse(sessionStorage.getItem('userData')!);
+    const token: any = (user) ? user.token : null;
+    console.log('token: ',token)
+    console.log('user: ',user)
+    return token;
+}
+
   getCompanyById(id:any): Observable<any> {
     let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
+        'Authorization': 'Bearer ' + this.getAutentication()
     });
     let options = { headers: headers };
     return this.http.get<any>(environment.companyContactsCtrl.getById+'/'+id, options);
@@ -23,15 +31,16 @@ export class ApiService {
   getAllCompanies(): Observable<any> {
     let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
+        'Authorization': `Bearer ${this.getAutentication()}`
     });
+    console.log(headers)
     let options = { headers: headers };
     return this.http.get<any>(environment.companyContactsCtrl.getAll, options);
   }
   createCompany(company:any): Observable<any> {
     let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
+        'Authorization': 'Bearer ' + this.getAutentication()
     });
     console.log(company);
     let options = { headers: headers };
@@ -40,7 +49,7 @@ export class ApiService {
   updateCompany(id:any): Observable<any> {
     let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
+        'Authorization': 'Bearer ' + this.getAutentication()
     });
     let options = { headers: headers };
     return this.http.put<any>(environment.companyContactsCtrl.update+'/'+id, options);
@@ -48,7 +57,7 @@ export class ApiService {
   deleteCompany(id:any): Observable<any> {
     let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '
+        'Authorization': 'Bearer ' + this.getAutentication()
     });
     let options = { headers: headers };
     return this.http.delete<any>(environment.companyContactsCtrl.delete+'/'+id, options);
