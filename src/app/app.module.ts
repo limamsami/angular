@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 import routes from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -34,9 +35,9 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     MultiSelectModule,
     TooltipModule,
     RouterModule.forRoot(routes),
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
   ],
-  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent],
+  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent,LoginComponent],
   bootstrap: [ AppComponent ],
   providers: []
 })

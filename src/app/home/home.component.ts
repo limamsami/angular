@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { AppComponent } from '../app.component';
+import { CompanyContact } from '../company-contact/company-contact';
+import { Mode } from '../common/enums/modification-mode';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +12,66 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 })
 export class HomeComponent {
 
-  constructor(
+  constructor(private _app:AppComponent,
     public router: Router,
     public ngxSmartModalService: NgxSmartModalService
   ) {}
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this._app.apiService.getAllCompanies().subscribe((data:any)=>{
+      console.log(data);
+      this.companies=data;
+    });
+  }
+  
+   company=new CompanyContact();
+
+   getCompanyById(id:any){
+    console.log("getById==>",id);
+
+    this._app.apiService.getCompanyById(id).subscribe((data:any)=>{
+      console.log(data);
+      this.company=data;
+      this.modes=Mode.update;
+      this.ngxSmartModalService.getModal('myModal').open()
+    });
+   }
+   modes =Mode.create
+   modificationMode(mode :Mode=this.modes,company:any=null){
+    if (mode===Mode.create) {
+      this.createCompany()
+    }
+    if (mode===Mode.update) {
+      this.updateCompany(this.company)
+    }
+    if (mode===Mode.delete) {
+    }
+    this.modes =Mode.create
+
+   }
+
+
+   updateCompany(company:any){
+    console.log("update==>",company);
+
+    this._app.apiService.updateCompany(company).subscribe((data:any)=>{
+      console.log("data==>",data);
+      this.ngxSmartModalService.getModal('myModal').close();
+      window.location.reload();
+    });
+   }
+   createCompany(){
+     this._app.apiService.createCompany(this.company).subscribe((data:any)=>{
+      console.log("create==>",data);
+       window.location.reload();
+     });
+   }
+   companies:any[]=[];
+   deleteCompany(id:any){
+    this._app.apiService.deleteCompany(id).subscribe((data:any)=>{
+      console.log(data);
+      window.location.reload();
+    });
+   }
 }

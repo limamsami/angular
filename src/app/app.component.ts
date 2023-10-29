@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { SelectItem, FilterService, FilterMatchMode } from "primeng/api";
+import { ApiService } from "./services/api.service";
 
 
 @Component({
@@ -13,7 +14,8 @@ export class AppComponent {
   
   
 
-  constructor(
+  constructor(public apiService: ApiService,
+
     public router: Router
   ) {}
 
