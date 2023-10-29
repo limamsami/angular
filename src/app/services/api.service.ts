@@ -61,7 +61,14 @@ export class ApiService {
     let options = { headers: headers };
     return this.http.delete<any>(environment.companyContactsCtrl.delete+'/'+id, options);
   }
-
+  deleteAllCompany(companielist:any): Observable<any> {
+    let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.getAutentication()
+    });
+    let options = { headers: headers };
+    return this.http.post<any>(environment.companyContactsCtrl.deleteAll,companielist, options);
+  }
   async login(email: string, password: string): Promise<any> {
     const body = { Username: email, Password: password };
     try {

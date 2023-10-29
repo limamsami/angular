@@ -74,4 +74,11 @@ export class HomeComponent {
       window.location.reload();
     });
    }
+   deleteAllCompany(){
+    console.log(this.companies);
+    this._app.apiService.deleteAllCompany(this.companies).subscribe((data:any)=>{
+      console.log(data);
+      window.location.reload();
+    });
+   }
 }
