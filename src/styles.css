@@ -3,3 +3,6 @@
 @import 'primeng/resources/primeng.min.css';
 @import 'primeng/resources/primeng.min.css';
 @import 'primeicons/primeicons.css'; 
+
+
+@import "node_modules/ngx-smart-modal/styles/ngx-smart-modal.css"

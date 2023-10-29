@@ -17,6 +17,8 @@ import { CreateSocieteComponent } from './create-societe/create-societe.componen
 import { RouterModule } from '@angular/router';
 import routes from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
+
 
 @NgModule({
   imports: [
@@ -31,9 +33,10 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     MultiSelectModule,
     TooltipModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxSmartModalModule.forRoot()
   ],
-  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent ],
+  declarations: [ AppComponent, CreateSocieteComponent, HomeComponent],
   bootstrap: [ AppComponent ],
   providers: []
 })

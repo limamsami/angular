@@ -30,20 +30,10 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/css/style.min.css"
+              "src/styles.css"
             ],
             "scripts": [
-             "src/assets/libs/jquery/dist/jquery.min.js",
-    "src/assets/libs/simplebar/dist/simplebar.min.js",
-    "src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js",
-    "src/assets/js/app.min.js",
-    "src/assets/js/app.init.js",
-    "src/assets/js/app-style-switcher.js",
-    "src/assets/js/sidebarmenu.js",
-    
-    "src/assets/js/custom.js",
-   "src/assets/js/apps/contact.js"
+       
             ]
           },
           "configurations": {
