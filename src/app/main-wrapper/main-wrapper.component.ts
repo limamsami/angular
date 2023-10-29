@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { AppComponent } from '../app.component';
+import { CreateCompanyComponent } from '../create-company/create-company.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-main-wrapper',
@@ -8,7 +11,7 @@ import { ApiService } from '../services/api.service';
 })
 export class MainWrapperComponent {
 
-  constructor(private _service:ApiService){
+  constructor(private _app:AppComponent){
 
   }
 
@@ -18,14 +21,14 @@ export class MainWrapperComponent {
   openModal() {
 
       this.openMdl=true;
-
+      
     
-     //this.matDialog.open(CreateCompanyComponent);
+    // this.matDialog.open(CreateCompanyComponent);
   }
   //inisialisation
    companies:any[]=[];
    deleteCompany(id:any){
-    this._service.deleteCompany(id).subscribe((data:any)=>{
+    this._app.apiService.deleteCompany(id).subscribe((data:any)=>{
       console.log(data);
     });
    }
@@ -33,7 +36,7 @@ export class MainWrapperComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.openMdl=false;
-    this._service.getAllCompanies().subscribe((data:any)=>{
+    this._app.apiService.getAllCompanies().subscribe((data:any)=>{
       console.log(data);
       this.companies=data;
     });

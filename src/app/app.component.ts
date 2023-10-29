@@ -18,6 +18,7 @@ export class AppComponent {
     public route: ActivatedRoute,
     public apiService: ApiService,
     public confirm:ConfirmDialogService
+    
   ) {}
 
   ngOnInit() {
