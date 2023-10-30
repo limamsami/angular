@@ -11,22 +11,33 @@ import { Mode } from '../common/enums/modification-mode';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  isSelectAll: boolean;
 
   constructor(private _app:AppComponent,
     public router: Router,
     public ngxSmartModalService: NgxSmartModalService
-  ) {}
+  ) {
+    this.isSelectAll = false;
+
+  }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this._app.apiService.getAllCompanies().subscribe((data:any)=>{
       console.log(data);
       this.companies=data;
+      this.checkboxList=data;
+    for (let i = 0; i < data.length; i++) {
+      this.checkboxList[i].isSelected=false;
+      console.log(this.checkboxList[i] )
+   }
     });
+    
+   
   }
-  
-   company=new CompanyContact();
+  company=new CompanyContact();
 
+  
    getCompanyById(id:any){
     console.log("getById==>",id);
 
@@ -81,4 +92,29 @@ export class HomeComponent {
       window.location.reload();
     });
    }
+   checkboxList:any=[];
+   selectAll(){
+     if (this.isSelectAll) {
+       this.isSelectAll=false;
+       console.log("selectalll = ",false)
+
+     }else{
+       this.isSelectAll=true;
+       console.log("selectalll = ",true)
+
+     }
+     this.onSelectAll();
+   }
+   onSelectAll() {
+    console.log("________onSelectAll________");
+
+    this.checkboxList.forEach((item:any) => {
+      item.isSelected=this.isSelectAll;
+      console.log("item = ",item)
+
+    });
+    console.log(this.checkboxList)
+
+  }
+  
 }

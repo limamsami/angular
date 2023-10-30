@@ -316,11 +316,11 @@
 		  <div class="card-body px-4 py-3">
 			<div class="row align-items-center">
 			  <div class="col-9">
-				<h4 class="fw-semibold mb-8">Societe</h4>
+				<h4 class="fw-semibold mb-8">Societe contacts</h4>
 				<nav aria-label="breadcrumb">
 				  <ol class="breadcrumb">
 					<li class="breadcrumb-item"><a class="text-muted " href="./index.html">Dashboard</a></li>
-					<li class="breadcrumb-item" aria-current="page">Societe</li>
+					<li class="breadcrumb-item" aria-current="page">Societe contacts</li>
 				  </ol>
 				</nav>
 			  </div>
@@ -423,7 +423,7 @@
 				  <tr><th>
 					<div class="n-chk align-self-center text-center">
 					  <div class="form-check">
-						<input type="checkbox" class="form-check-input primary" id="contact-check-all">
+						<input (click)="selectAll()" type="checkbox" class="form-check-input primary" id="contact-check-all">
 						<label class="form-check-label" for="contact-check-all"></label>
 						<span class="new-control-indicator"></span>
 					  </div>
@@ -440,11 +440,11 @@
 				  
 				  <!-- end row -->
 				  <!-- start row -->
-				  <tr class="search-items" *ngFor="let item of companies">
+				  <tr class="search-items" *ngFor="let box of checkboxList;let item of companies" >
 					<td>
 					  <div class="n-chk align-self-center text-center">
 						<div class="form-check">
-						  <input type="checkbox" class="form-check-input contact-chkbox primary" id="checkbox2">
+						  <input [(ngModel)]="box.isSelected" [value]="item.id" type="checkbox" class="form-check-input  primary" name="linecheckbox">
 						  <label class="form-check-label" for="checkbox2"></label>
 						</div>
 					  </div>
