@@ -1,4 +1,4 @@
-const urlApi = 'https://localhost:44325/api/';
+const urlApi = 'https://localhost:7256/api/';
 
 export const environment = {
     production: false,

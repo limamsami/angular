@@ -361,6 +361,7 @@
 					  ---------------- -->
 		  <!-- Modal -->
 		  <ngx-smart-modal #myModal identifier="myModal">
+			
 			<div class="modal-header d-flex align-items-center">
 				<h5 class="modal-title">Societe</h5>
 				<!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
@@ -371,36 +372,74 @@
 					<div  id="addContactModalTitle">
 					  <div class="row">
 						<div class="col-md-6">
-						  <div class="mb-3 contact-name">
-							<input [(ngModel)]="company.firstName" type="text" id="c-name" class="form-control" placeholder="Name">
-							<span class="validation-text text-danger" style="display: none;"></span>
-						  </div>
+							<div [formGroup]="myGroup">
+								<div class="mb-3 contact-name">
+									<input [(ngModel)]="company.firstName" type="text" id="c-name" class="form-control" placeholder=" First Name" formControlName="firstName">
+									<span class="validation-text text-danger" style="display: none;"></span>
+								</div>
+							</div>
+							<div *ngIf="myGroup.controls['firstName'].invalid && (myGroup.controls['firstName'].dirty || myGroup.controls['firstName'].touched)" class="alert alert-danger">
+								<div *ngIf="myGroup.controls['firstName'].errors && myGroup.controls['firstName'].errors['required']">
+								  First Name is required.
+								</div>
+							  </div>
 						</div>
 						<div class="col-md-6">
-						  <div class="mb-3 contact-email">
-							<input [(ngModel)]="company.email" type="text" id="c-email" class="form-control" placeholder="Email">
-							<span class="validation-text text-danger" style="display: none;">Invalid Email</span>
-						  </div>
+							<div [formGroup]="myGroup">
+								<div class="mb-3 contact-occupation">
+									<input [(ngModel)]="company.lastName" type="text" id="c-occupation" class="form-control" placeholder="Last Name" formControlName="lastName">
+								</div>
+								<div *ngIf="myGroup.controls['lastName'].invalid && (myGroup.controls['lastName'].dirty || myGroup.controls['lastName'].touched)" class="alert alert-danger">
+									<div *ngIf="myGroup.controls['lastName'].errors && myGroup.controls['lastName'].errors['required']">
+									  Last Name is required.
+									</div>
+								</div>
+							</div>
 						</div>
 					  </div>
 					  <div class="row">
 						<div class="col-md-6">
-						  <div class="mb-3 contact-occupation">
-							<input [(ngModel)]="company.lastName" type="text" id="c-occupation" class="form-control" placeholder="LastName">
-						  </div>
+							<div [formGroup]="myGroup">
+								<div class="mb-3 contact-email">
+									<input [(ngModel)]="company.email" type="text" id="c-email" class="form-control" placeholder="Email" formControlName="email">
+									<span class="validation-text text-danger" style="display: none;">Invalid Email</span>
+								</div>
+								<div *ngIf="myGroup.controls['email'].invalid && (myGroup.controls['email'].dirty || myGroup.controls['email'].touched)" class="alert alert-danger">
+									<div *ngIf="myGroup.controls['email'].errors && myGroup.controls['email'].errors['email']">
+									  Email is invalid.
+									</div>
+								  </div>
+							</div>
 						</div>
 						<div class="col-md-6">
-						  <div class="mb-3 contact-phone">
-							<input [(ngModel)]="company.phone" type="text" id="c-phone" class="form-control" placeholder="Phone">
-							<span class="validation-text text-danger" style="display: none;">Invalid (Enter 10 Digits)</span>
-						  </div>
+							<div [formGroup]="myGroup">
+								<div class="mb-3 contact-phone">
+									<input [(ngModel)]="company.phone" type="text" id="c-phone" class="form-control" placeholder="Phone" formControlName="phone">
+									<span class="validation-text text-danger" style="display: none;">Invalid (Enter 10 Digits)</span>
+								</div>
+								<div *ngIf="myGroup.controls['phone'].invalid && (myGroup.controls['phone'].dirty || myGroup.controls['phone'].touched)" class="alert alert-danger">
+									<div *ngIf="myGroup.controls['phone'].errors && myGroup.controls['phone'].errors['required']">
+									  Phone is required.
+									</div>
+									<div *ngIf="myGroup.controls['phone'].errors && myGroup.controls['phone'].errors['pattern']">
+										Phone must be 10 digits.
+									  </div>
+								</div>
+							</div>
 						</div>
 					  </div>
 					  <div class="row">
 						<div class="col-md-12">
-						  <div class="mb-3 contact-location">
-							<input [(ngModel)]="company.address" type="text" id="c-location" class="form-control" placeholder="Location">
-						  </div>
+							<div [formGroup]="myGroup">
+								<div class="mb-3 contact-location">
+									<input [(ngModel)]="company.address" type="text" id="c-location" class="form-control" placeholder="Location" formControlName="address">
+								</div>
+								<div *ngIf="myGroup.controls['address'].invalid && (myGroup.controls['address'].dirty || myGroup.controls['address'].touched)" class="alert alert-danger">
+									<div *ngIf="myGroup.controls['address'].errors && myGroup.controls['address'].errors['required']">
+									  Address is required.
+									</div>
+								</div>
+							</div>
 						</div>
 					  </div>
 					</div>
@@ -412,6 +451,7 @@
 				<button (click)="modificationMode()" id="btn-edit" class="btn btn-success rounded-pill px-4" style="">Save</button>
 				<button class="btn btn-danger rounded-pill px-4" (click)="ngxSmartModalService.getModal('myModal').close()" > Discard </button>
 			  </div>
+			
 		  </ngx-smart-modal>
 		  
 		
