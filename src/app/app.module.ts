@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SignupComponent } from './signup/signup.component';
     TooltipModule,
     RouterModule.forRoot(routes),
     NgxSmartModalModule.forRoot(),
+    ReactiveFormsModule
   ],
   declarations: [ AppComponent, CreateSocieteComponent, HomeComponent,LoginComponent, SignupComponent],
   bootstrap: [ AppComponent ],

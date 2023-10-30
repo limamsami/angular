@@ -4,6 +4,7 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AppComponent } from '../app.component';
 import { CompanyContact } from '../company-contact/company-contact';
 import { Mode } from '../common/enums/modification-mode';
+import { FormGroup,  FormBuilder,  Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,32 @@ import { Mode } from '../common/enums/modification-mode';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  myGroup!: FormGroup;
   isSelectAll: boolean;
 
   constructor(private _app:AppComponent,
     public router: Router,
-    public ngxSmartModalService: NgxSmartModalService
-  ) {
-    this.isSelectAll = false;
+    public ngxSmartModalService: NgxSmartModalService,
+    private fb: FormBuilder
+    ) {
+      this.isSelectAll = false;
+  
+    }
 
-  }
+  
+
+
+    
   ngOnInit(): void {
+
+    this.myGroup = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.email),
+      phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{10}$')]),
+      address: new FormControl('', Validators.required),
+  });
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this._app.apiService.getAllCompanies().subscribe((data:any)=>{
@@ -118,3 +135,5 @@ export class HomeComponent {
   }
   
 }
+
+
