@@ -448,7 +448,7 @@
 			  </div>
 			  <div class="modal-footer">
 				<button  id="btn-add" class="btn btn-success rounded-pill px-4" style="display: none;">Add</button>
-				<button (click)="modificationMode()" id="btn-edit" class="btn btn-success rounded-pill px-4" style="">Save</button>
+				<button (click)="modificationMode()" id="btn-edit" class="btn btn-success rounded-pill px-4" style="" [disabled]="myGroup.invalid">Save</button>
 				<button class="btn btn-danger rounded-pill px-4" (click)="ngxSmartModalService.getModal('myModal').close()" > Discard </button>
 			  </div>
 			
